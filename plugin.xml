@@ -112,12 +112,10 @@
 
         <source-file src="src/android/LibraryProject/app/src/main/res/drawable/launcher_icon.png" target-dir="res/drawable"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/drawable/share_via_barcode.png" target-dir="res/drawable"/>
-        <source-file src="src/android/LibraryProject/app/src/main/res/drawable/shopper_icon.png" target-dir="res/drawable"/>
-        <source-file src="src/android/LibraryProject/app/src/main/res/drawable/flip_camera.png" target-dir="res/drawable"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/drawable-hdpi/launcher_icon.png" target-dir="res/drawable-hdpi"/>
-        <source-file src="src/android/LibraryProject/app/src/main/res/drawable-hdpi/shopper_icon.png" target-dir="res/drawable-hdpi"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/drawable-xhdpi/launcher_icon.png" target-dir="res/drawable-xhdpi"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/drawable-xxhdpi/launcher_icon.png" target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/LibraryProject/app/src/main/res/layout/app_picker_list_item.xml" target-dir="res/layout"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/layout/bookmark_picker_list_item.xml" target-dir="res/layout"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/layout/capture.xml" target-dir="res/layout"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/layout/encode.xml" target-dir="res/layout"/>
@@ -138,6 +136,8 @@
         <source-file src="src/android/LibraryProject/app/src/main/res/values/colors.xml" target-dir="res/values"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/values/dimens.xml" target-dir="res/values"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/values/ids.xml" target-dir="res/values"/>
+        <source-file src="src/android/LibraryProject/app/src/main/res/values/styles.xml" target-dir="res/values"/>
+        <source-file src="src/android/LibraryProject/app/src/main/res/values/themes.xml" target-dir="res/values"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/values-ar/strings.xml" target-dir="res/values-ar"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/values-bg/strings.xml" target-dir="res/values-bg"/>
         <source-file src="src/android/LibraryProject/app/src/main/res/values-ca/strings.xml" target-dir="res/values-ca"/>
