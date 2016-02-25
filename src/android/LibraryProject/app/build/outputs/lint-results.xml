@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="4" by="lint 24.0.2">
+<issues format="4" by="lint 24.4.1">
 
     <issue
         id="LocaleFolder"
@@ -37,6 +37,48 @@ To work around this, place your resources in a `values` folder using the depreca
         urls="http://developer.android.com/reference/java/util/Locale.html">
         <location
             file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-id"/>
+    </issue>
+
+    <issue
+        id="OldTargetApi"
+        severity="Warning"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details."
+        category="Correctness"
+        priority="6"
+        summary="Target SDK attribute is not targeting latest version"
+        explanation="When your application runs on a version of Android that is more recent than your `targetSdkVersion` specifies that it has been tested with, various compatibility modes kick in. This ensures that your application continues to work, but it may look out of place. For example, if the `targetSdkVersion` is less than 14, your app may get an option button in the UI.
+
+To fix this issue, set the `targetSdkVersion` to the highest available value. Then test your app to make sure everything works correctly. You may want to consult the compatibility notes to see what changes apply to each version you are adding support for: http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        url="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        urls="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        errorLine1="  &lt;uses-sdk android:minSdkVersion=&quot;15&quot; android:targetSdkVersion=&quot;22&quot;/>"
+        errorLine2="                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/AndroidManifest.xml"
+            line="34"
+            column="40"/>
+    </issue>
+
+    <issue
+        id="OldTargetApi"
+        severity="Warning"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
+        category="Correctness"
+        priority="6"
+        summary="Target SDK attribute is not targeting latest version"
+        explanation="When your application runs on a version of Android that is more recent than your `targetSdkVersion` specifies that it has been tested with, various compatibility modes kick in. This ensures that your application continues to work, but it may look out of place. For example, if the `targetSdkVersion` is less than 14, your app may get an option button in the UI.
+
+To fix this issue, set the `targetSdkVersion` to the highest available value. Then test your app to make sure everything works correctly. You may want to consult the compatibility notes to see what changes apply to each version you are adding support for: http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        url="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        urls="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        errorLine1="        targetSdkVersion 22"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/build.gradle"
+            line="9"
+            column="9"/>
     </issue>
 
     <issue
@@ -103,6 +145,404 @@ To work around this, place your resources in a `values` folder using the depreca
             file="/Users/rkstro/Development/sandbox/android/app/src/main/res/layout-ldpi/capture.xml"
             line="40"
             column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.raw.beep` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/raw/beep.ogg"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.layout.capture` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/layout/capture.xml"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/layout-ldpi/capture.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.menu.capture` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/menu/capture.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.color.possible_result_points` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="  &lt;color name=&quot;possible_result_points&quot;>#c0ffbd21&lt;/color> &lt;!-- Android standard ICS color -->"
+        errorLine2="         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values/colors.xml"
+            line="20"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.color.result_points` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="  &lt;color name=&quot;result_points&quot;>#c099cc00&lt;/color> &lt;!-- Android standard ICS color -->"
+        errorLine2="         ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values/colors.xml"
+            line="22"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.color.viewfinder_laser` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="  &lt;color name=&quot;viewfinder_laser&quot;>#ffcc0000&lt;/color> &lt;!-- Android standard ICS color -->"
+        errorLine2="         ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values/colors.xml"
+            line="27"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.color.viewfinder_mask` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="  &lt;color name=&quot;viewfinder_mask&quot;>#60000000&lt;/color>"
+        errorLine2="         ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values/colors.xml"
+            line="28"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.msg_bulk_mode_scanned` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="  &lt;string name=&quot;msg_bulk_mode_scanned&quot;>Bulk mode: barcode scanned and saved&lt;/string>"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ar/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-bg/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ca/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-cs/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-da/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-de/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-el/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-es/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-eu/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-fi/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-fr/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-he/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-hi/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-hu/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-id/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-it/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-iw/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ja/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ko/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-nl/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-pl/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-pt/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ro/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ru/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-sk/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-sl/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-sv/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-th/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-tr/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-uk/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-zh-rCN/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-zh-rHK/strings.xml"
+            line="63"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-zh-rTW/strings.xml"
+            line="63"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.msg_camera_framework_bug` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="  &lt;string name=&quot;msg_camera_framework_bug&quot;>Sorry, the Android camera encountered a problem. You may need to restart the device.&lt;/string>"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ar/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-bg/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ca/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-cs/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-da/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-de/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-el/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-es/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-eu/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-fi/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-fr/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-he/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-hi/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-hu/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-id/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-it/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-iw/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ja/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ko/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-nl/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-pl/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-pt/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ro/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-ru/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-sk/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-sl/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-sv/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-th/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-tr/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-uk/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-zh-rCN/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-zh-rHK/strings.xml"
+            line="64"
+            column="11"/>
+        <location
+            file="/Users/rkstro/Development/sandbox/android/app/src/main/res/values-zh-rTW/strings.xml"
+            line="64"
+            column="11"/>
     </issue>
 
     <issue

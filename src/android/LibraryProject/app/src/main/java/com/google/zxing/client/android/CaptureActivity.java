@@ -138,14 +138,14 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     Window window = getWindow();
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-    setContentView(R.layout.capture);
+    setContentView(fakeR.getId("layout", "capture"));
 
     hasSurface = false;
     inactivityTimer = new InactivityTimer(this);
     beepManager = new BeepManager(this);
     ambientLightManager = new AmbientLightManager(this);
 
-    PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+    PreferenceManager.setDefaultValues(this, fakeR.getId("xml", "preferences"), false);
   }
 
   @Override
@@ -162,11 +162,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     // off screen.
     cameraManager = new CameraManager(getApplication());
 
-    viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+    viewfinderView = (ViewfinderView) findViewById(fakeR.getId("id", "viewfinder_view"));
     viewfinderView.setCameraManager(cameraManager);
 
-    resultView = findViewById(R.id.result_view);
-    statusView = (TextView) findViewById(R.id.status_view);
+    resultView = findViewById(fakeR.getId("id", "result_view"));
+    statusView = (TextView) findViewById(fakeR.getId("id", "status_view"));
 
     handler = null;
     lastResult = null;
@@ -257,7 +257,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     }
 
-    SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+    SurfaceView surfaceView = (SurfaceView) findViewById(fakeR.getId("id", "preview_view"));
     SurfaceHolder surfaceHolder = surfaceView.getHolder();
     if (hasSurface) {
       // The activity was paused but not stopped, so the surface still exists. Therefore
@@ -314,7 +314,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     cameraManager.closeDriver();
     //historyManager = null; // Keep for onActivityResult
     if (!hasSurface) {
-      SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+      SurfaceView surfaceView = (SurfaceView) findViewById(fakeR.getId("id", "preview_view"));
       SurfaceHolder surfaceHolder = surfaceView.getHolder();
       surfaceHolder.removeCallback(this);
     }
@@ -359,7 +359,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater menuInflater = getMenuInflater();
-    menuInflater.inflate(R.menu.capture, menu);
+    menuInflater.inflate(fakeR.getId("menu", "capture"), menu);
     return super.onCreateOptionsMenu(menu);
   }
 
@@ -406,7 +406,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         savedResultToShow = result;
       }
       if (savedResultToShow != null) {
-        Message message = Message.obtain(handler, R.id.decode_succeeded, savedResultToShow);
+        Message message = Message.obtain(handler, fakeR.getId("id", "decode_succeeded"), savedResultToShow);
         handler.sendMessage(message);
       }
       savedResultToShow = null;
@@ -470,7 +470,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (fromLiveScan && prefs.getBoolean(PreferencesActivity.KEY_BULK_MODE, false)) {
           Toast.makeText(getApplicationContext(),
-                         getResources().getString(R.string.msg_bulk_mode_scanned) + " (" + rawResult.getText() + ')',
+                         getResources().getString(fakeR.getId("string", "msg_bulk_mode_scanned")) + " (" + rawResult.getText() + ')',
                          Toast.LENGTH_SHORT).show();
           // Wait a moment or else it will scan the same barcode continuously about 3 times
           restartPreviewAfterDelay(BULK_MODE_SCAN_DELAY_MS);
@@ -493,7 +493,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     if (points != null && points.length > 0) {
       Canvas canvas = new Canvas(barcode);
       Paint paint = new Paint();
-      paint.setColor(getResources().getColor(R.color.result_points));
+      paint.setColor(getResources().getColor(fakeR.getId("color", "result_points")));
       if (points.length == 2) {
         paint.setStrokeWidth(4.0f);
         drawLine(canvas, paint, points[0], points[1], scaleFactor);
@@ -544,27 +544,27 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     viewfinderView.setVisibility(View.GONE);
     resultView.setVisibility(View.VISIBLE);
 
-    ImageView barcodeImageView = (ImageView) findViewById(R.id.barcode_image_view);
+    ImageView barcodeImageView = (ImageView) findViewById(fakeR.getId("id", "barcode_image_view"));
     if (barcode == null) {
       barcodeImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),
-          R.drawable.launcher_icon));
+          fakeR.getId("drawable", "launcher_icon")));
     } else {
       barcodeImageView.setImageBitmap(barcode);
     }
 
-    TextView formatTextView = (TextView) findViewById(R.id.format_text_view);
+    TextView formatTextView = (TextView) findViewById(fakeR.getId("id", "format_text_view"));
     formatTextView.setText(rawResult.getBarcodeFormat().toString());
 
-    TextView typeTextView = (TextView) findViewById(R.id.type_text_view);
+    TextView typeTextView = (TextView) findViewById(fakeR.getId("id", "type_text_view"));
     typeTextView.setText(resultHandler.getType().toString());
 
     DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-    TextView timeTextView = (TextView) findViewById(R.id.time_text_view);
+    TextView timeTextView = (TextView) findViewById(fakeR.getId("id", "time_text_view"));
     timeTextView.setText(formatter.format(new Date(rawResult.getTimestamp())));
 
 
-    TextView metaTextView = (TextView) findViewById(R.id.meta_text_view);
-    View metaTextViewLabel = findViewById(R.id.meta_text_view_label);
+    TextView metaTextView = (TextView) findViewById(fakeR.getId("id", "meta_text_view"));
+    View metaTextViewLabel = findViewById(fakeR.getId("id", "meta_text_view_label"));
     metaTextView.setVisibility(View.GONE);
     metaTextViewLabel.setVisibility(View.GONE);
     Map<ResultMetadataType,Object> metadata = rawResult.getResultMetadata();
@@ -583,12 +583,12 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       }
     }
 
-    TextView contentsTextView = (TextView) findViewById(R.id.contents_text_view);
+    TextView contentsTextView = (TextView) findViewById(fakeR.getId("id", "contents_text_view"));
     contentsTextView.setText(displayContents);
     int scaledSize = Math.max(22, 32 - displayContents.length() / 4);
     contentsTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
 
-    TextView supplementTextView = (TextView) findViewById(R.id.contents_supplement_text_view);
+    TextView supplementTextView = (TextView) findViewById(fakeR.getId("id", "contents_supplement_text_view"));
     supplementTextView.setText("");
     supplementTextView.setOnClickListener(null);
     if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(
@@ -600,7 +600,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
 
     int buttonCount = resultHandler.getButtonCount();
-    ViewGroup buttonView = (ViewGroup) findViewById(R.id.result_button_view);
+    ViewGroup buttonView = (ViewGroup) findViewById(fakeR.getId("id", "result_button_view"));
     buttonView.requestFocus();
     for (int x = 0; x < ResultHandler.MAX_BUTTON_COUNT; x++) {
       TextView button = (TextView) buttonView.getChildAt(x);
@@ -679,7 +679,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
           }
         }
       }
-      sendReplyMessage(R.id.return_scan_result, intent, resultDurationMS);
+      sendReplyMessage(fakeR.getId("id", "return_scan_result"), intent, resultDurationMS);
       
     } else if (source == IntentSource.PRODUCT_SEARCH_LINK) {
       
@@ -687,14 +687,14 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       // TLD as the scan URL.
       int end = sourceUrl.lastIndexOf("/scan");
       String replyURL = sourceUrl.substring(0, end) + "?q=" + resultHandler.getDisplayContents() + "&source=zxing";      
-      sendReplyMessage(R.id.launch_product_query, replyURL, resultDurationMS);
+      sendReplyMessage(fakeR.getId("id", "launch_product_query"), replyURL, resultDurationMS);
       
     } else if (source == IntentSource.ZXING_LINK) {
 
       if (scanFromWebPageManager != null && scanFromWebPageManager.isScanFromWebPage()) {
         String replyURL = scanFromWebPageManager.buildReplyURL(rawResult, resultHandler);
         scanFromWebPageManager = null;
-        sendReplyMessage(R.id.launch_product_query, replyURL, resultDurationMS);
+        sendReplyMessage(fakeR.getId("id", "launch_product_query"), replyURL, resultDurationMS);
       }
       
     }
@@ -739,23 +739,23 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
   private void displayFrameworkBugMessageAndExit() {
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle(getString(R.string.app_name));
-    builder.setMessage(getString(R.string.msg_camera_framework_bug));
-    builder.setPositiveButton(R.string.button_ok, new FinishListener(this));
+    builder.setTitle(getString(fakeR.getId("string", "app_name")));
+    builder.setMessage(getString(fakeR.getId("string", "msg_camera_framework_bug")));
+    builder.setPositiveButton(fakeR.getId("string", "button_ok"), new FinishListener(this));
     builder.setOnCancelListener(new FinishListener(this));
     builder.show();
   }
 
   public void restartPreviewAfterDelay(long delayMS) {
     if (handler != null) {
-      handler.sendEmptyMessageDelayed(R.id.restart_preview, delayMS);
+      handler.sendEmptyMessageDelayed(fakeR.getId("id", "restart_preview"), delayMS);
     }
     resetStatusView();
   }
 
   private void resetStatusView() {
     resultView.setVisibility(View.GONE);
-    statusView.setText(R.string.msg_default_status);
+    statusView.setText(fakeR.getId("string", "msg_default_status"));
     statusView.setVisibility(View.VISIBLE);
     viewfinderView.setVisibility(View.VISIBLE);
     lastResult = null;

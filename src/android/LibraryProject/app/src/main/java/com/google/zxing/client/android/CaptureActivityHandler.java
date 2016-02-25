@@ -102,7 +102,7 @@ public final class CaptureActivityHandler extends Handler {
       } else if( message.what == fakeR.getId("id", "decode_failed") ) {
         // We're decoding as fast as possible, so when one decode fails, start another.
         state = State.PREVIEW;
-        cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
+        cameraManager.requestPreviewFrame(decodeThread.getHandler(), fakeR.getId("id", "decode"));
       } else if( message.what == fakeR.getId("id", "return_scan_result") ) {
         activity.setResult(Activity.RESULT_OK, (Intent) message.obj);
         activity.finish();
@@ -139,7 +139,7 @@ public final class CaptureActivityHandler extends Handler {
   public void quitSynchronously() {
     state = State.DONE;
     cameraManager.stopPreview();
-    Message quit = Message.obtain(decodeThread.getHandler(), R.id.quit);
+    Message quit = Message.obtain(decodeThread.getHandler(), fakeR.getId("id", "quit"));
     quit.sendToTarget();
     try {
       // Wait at most half a second; should be enough time, and onPause() will timeout quickly
@@ -149,14 +149,14 @@ public final class CaptureActivityHandler extends Handler {
     }
 
     // Be absolutely sure we don't send any queued up messages
-    removeMessages(R.id.decode_succeeded);
-    removeMessages(R.id.decode_failed);
+    removeMessages(fakeR.getId("id", "decode_succeeded"));
+    removeMessages(fakeR.getId("id", "decode_failed"));
   }
 
   private void restartPreviewAndDecode() {
     if (state == State.SUCCESS) {
       state = State.PREVIEW;
-      cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
+      cameraManager.requestPreviewFrame(decodeThread.getHandler(), fakeR.getId("id", "decode"));
       activity.drawViewfinder();
     }
   }

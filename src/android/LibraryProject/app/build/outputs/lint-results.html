@@ -18,14 +18,18 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Wed Feb 24 23:55:25 ART 2016.<br/>
-0 errors and 32 warnings found:<br/><br/>
+Check performed at Thu Feb 25 01:39:42 ART 2016.<br/>
+0 errors and 43 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
 <tr>
 <td class="countColumn">2</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#LocaleFolder">LocaleFolder: Wrong locale name</a>
+</td></tr>
+<tr>
+<td class="countColumn">2</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#OldTargetApi">OldTargetApi: Target SDK attribute is not targeting latest version</a>
 </td></tr>
 <tr>
 <td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
@@ -40,6 +44,10 @@ Check performed at Wed Feb 24 23:55:25 ART 2016.<br/>
 <tr>
 <td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#InefficientWeight">InefficientWeight: Inefficient layout weight</a>
+</td></tr>
+<tr>
+<td class="countColumn">9</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#UnusedResources">UnusedResources: Unused resources</a>
 </td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#Usability:Icons">Usability:Icons</a>
 </td></tr>
@@ -89,6 +97,42 @@ To work around this, place your resources in a <code>values</code> folder using 
 </div>
 <br/><div class="moreinfo">More info: <a href="http://developer.android.com/reference/java/util/Locale.html">http://developer.android.com/reference/java/util/Locale.html</a>
 </div><br/>To suppress this error, use the issue id "LocaleFolder" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="OldTargetApi"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">OldTargetApi: Target SDK attribute is not targeting latest version</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/AndroidManifest.xml">../../src/main/AndroidManifest.xml</a>:34</span>: <span class="message">Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the <code>android.os.Build.VERSION_CODES</code> javadoc for details.</span><br /><pre class="errorlines">
+<span class="lineno">  31</span>   &lt;uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+<span class="lineno">  32</span>   &lt;uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<span class="lineno">  33</span> 
+<span class="lineno">  34</span>   &lt;uses-sdk android:minSdkVersion="15" <span class="errorspan">android:targetSdkVersion="22"/></span>
+<span class="lineno">  35</span> 
+<span class="lineno">  36</span>   &lt;!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+</pre>
+<span class="location"><a href="../../build.gradle">../../build.gradle</a>:9</span>: <span class="message">Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details.</span><br /><pre class="errorlines">
+<span class="lineno">   6</span> 
+<span class="lineno">   7</span>     defaultConfig {
+<span class="lineno">   8</span>         minSdkVersion 15
+<span class="lineno">   9</span>         <span class="errorspan">targetSdkVersion 22</span>
+<span class="lineno">  10</span>     }
+<span class="lineno">  11</span> 
+</pre>
+</div>
+<div class="metadata">Note: This issue has an associated quickfix operation in Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
+<br>
+Priority: 6 / 10<br/>
+Category: Correctness</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Target SDK attribute is not targeting latest version.</div>
+<div class="explanation">
+When your application runs on a version of Android that is more recent than your <code>targetSdkVersion</code> specifies that it has been tested with, various compatibility modes kick in. This ensures that your application continues to work, but it may look out of place. For example, if the <code>targetSdkVersion</code> is less than 14, your app may get an option button in the UI.<br/>
+<br/>
+To fix this issue, set the <code>targetSdkVersion</code> to the highest available value. Then test your app to make sure everything works correctly. You may want to consult the compatibility notes to see what changes apply to each version you are adding support for: <a href="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html">http://developer.android.com/reference/android/os/Build.VERSION_CODES.html</a>
+</div>
+<br/><div class="moreinfo">More info: <a href="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html">http://developer.android.com/reference/android/os/Build.VERSION_CODES.html</a>
+</div><br/>To suppress this error, use the issue id "OldTargetApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 </div>
 <a name="GradleDependency"></a>
 <div class="issue">
@@ -174,6 +218,157 @@ Explanation: Inefficient layout weight.</div>
 When only a single widget in a LinearLayout defines a weight, it is more efficient to assign a width/height of <code>0dp</code> to it since it will absorb all the remaining space anyway. With a declared width/height of <code>0dp</code> it does not have to measure its own size first.
 </div>
 <br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "InefficientWeight" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="UnusedResources"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">UnusedResources: Unused resources</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/res/raw/beep.ogg">../../src/main/res/raw/beep.ogg</a></span>: <span class="message">The resource <code>R.raw.beep</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/layout/capture.xml">../../src/main/res/layout/capture.xml</a></span>: <span class="message">The resource <code>R.layout.capture</code> appears to be unused</span><br />
+<ul></ul><button id="Location2DivLink" onclick="reveal('Location2Div');" />+ 1 Additional Locations...</button>
+<div id="Location2Div" style="display: none">
+Additional locations: <ul>
+<li> <span class="location"><a href="../../src/main/res/layout-ldpi/capture.xml">../../src/main/res/layout-ldpi/capture.xml</a></span>
+</ul>
+</div><br/><br/>
+<span class="location"><a href="../../src/main/res/menu/capture.xml">../../src/main/res/menu/capture.xml</a></span>: <span class="message">The resource <code>R.menu.capture</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:20</span>: <span class="message">The resource <code>R.color.possible_result_points</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  17</span> &lt;resources>
+<span class="lineno">  18</span>   &lt;color name="contents_text">#ff000000&lt;/color>
+<span class="lineno">  19</span>   &lt;color name="encode_view">#ffffffff&lt;/color>
+<span class="lineno">  20</span>   &lt;color <span class="errorspan">name="possible_result_points">#c0ffbd21&lt;/color> &lt;!-- Android standard ICS color --></span>
+<span class="lineno">  21</span>   &lt;color name="result_minor_text">#ffc0c0c0&lt;/color>
+<span class="lineno">  22</span>   &lt;color name="result_points">#c099cc00&lt;/color> &lt;!-- Android standard ICS color -->
+</pre>
+<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:22</span>: <span class="message">The resource <code>R.color.result_points</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  19</span>   &lt;color name="encode_view">#ffffffff&lt;/color>
+<span class="lineno">  20</span>   &lt;color name="possible_result_points">#c0ffbd21&lt;/color> &lt;!-- Android standard ICS color -->
+<span class="lineno">  21</span>   &lt;color name="result_minor_text">#ffc0c0c0&lt;/color>
+<span class="lineno">  22</span>   &lt;color <span class="errorspan">name="result_points">#c099cc00&lt;/color> &lt;!-- Android standard ICS color --></span>
+<span class="lineno">  23</span>   &lt;color name="result_text">#ffffffff&lt;/color>
+<span class="lineno">  24</span>   &lt;color name="result_view">#b0000000&lt;/color>
+</pre>
+<button id="UnusedResourcesDivLink" onclick="reveal('UnusedResourcesDiv');" />+ 4 More Occurrences...</button>
+<div id="UnusedResourcesDiv" style="display: none">
+<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:27</span>: <span class="message">The resource <code>R.color.viewfinder_laser</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  24</span>   &lt;color name="result_view">#b0000000&lt;/color>
+<span class="lineno">  25</span>   &lt;color name="status_text">#ffffffff&lt;/color>
+<span class="lineno">  26</span>   &lt;color name="transparent">#00000000&lt;/color>
+<span class="lineno">  27</span>   &lt;color <span class="errorspan">name="viewfinder_laser">#ffcc0000&lt;/color> &lt;!-- Android standard ICS color --></span>
+<span class="lineno">  28</span>   &lt;color name="viewfinder_mask">#60000000&lt;/color>
+<span class="lineno">  29</span> &lt;/resources>
+</pre>
+<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:28</span>: <span class="message">The resource <code>R.color.viewfinder_mask</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  25</span>   &lt;color name="status_text">#ffffffff&lt;/color>
+<span class="lineno">  26</span>   &lt;color name="transparent">#00000000&lt;/color>
+<span class="lineno">  27</span>   &lt;color name="viewfinder_laser">#ffcc0000&lt;/color> &lt;!-- Android standard ICS color -->
+<span class="lineno">  28</span>   &lt;color <span class="errorspan">name="viewfinder_mask">#60000000&lt;/color></span>
+<span class="lineno">  29</span> &lt;/resources>
+<span class="lineno">  30</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:63</span>: <span class="message">The resource <code>R.string.msg_bulk_mode_scanned</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  60</span>   &lt;string name="menu_history">History&lt;/string>
+<span class="lineno">  61</span>   &lt;string name="menu_settings">Settings&lt;/string>
+<span class="lineno">  62</span>   &lt;string name="menu_share">Share&lt;/string>
+<span class="lineno">  63</span>   &lt;string <span class="errorspan">name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved&lt;/string></span>
+<span class="lineno">  64</span>   &lt;string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.&lt;/string>
+<span class="lineno">  65</span>   &lt;string name="msg_default_format">Format&lt;/string>
+</pre>
+<ul></ul><button id="Location8DivLink" onclick="reveal('Location8Div');" />+ 33 Additional Locations...</button>
+<div id="Location8Div" style="display: none">
+Additional locations: <ul>
+<li> <span class="location"><a href="../../src/main/res/values-ar/strings.xml">../../src/main/res/values-ar/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-bg/strings.xml">../../src/main/res/values-bg/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-ca/strings.xml">../../src/main/res/values-ca/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-cs/strings.xml">../../src/main/res/values-cs/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-da/strings.xml">../../src/main/res/values-da/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-de/strings.xml">../../src/main/res/values-de/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-el/strings.xml">../../src/main/res/values-el/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-es/strings.xml">../../src/main/res/values-es/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-eu/strings.xml">../../src/main/res/values-eu/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-fi/strings.xml">../../src/main/res/values-fi/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-fr/strings.xml">../../src/main/res/values-fr/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-he/strings.xml">../../src/main/res/values-he/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-hi/strings.xml">../../src/main/res/values-hi/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-hu/strings.xml">../../src/main/res/values-hu/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-id/strings.xml">../../src/main/res/values-id/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-it/strings.xml">../../src/main/res/values-it/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-iw/strings.xml">../../src/main/res/values-iw/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-ja/strings.xml">../../src/main/res/values-ja/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-ko/strings.xml">../../src/main/res/values-ko/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-nl/strings.xml">../../src/main/res/values-nl/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-pl/strings.xml">../../src/main/res/values-pl/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-pt/strings.xml">../../src/main/res/values-pt/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-ro/strings.xml">../../src/main/res/values-ro/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-ru/strings.xml">../../src/main/res/values-ru/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-sk/strings.xml">../../src/main/res/values-sk/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-sl/strings.xml">../../src/main/res/values-sl/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-sv/strings.xml">../../src/main/res/values-sv/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-th/strings.xml">../../src/main/res/values-th/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-tr/strings.xml">../../src/main/res/values-tr/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-uk/strings.xml">../../src/main/res/values-uk/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-zh-rCN/strings.xml">../../src/main/res/values-zh-rCN/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-zh-rHK/strings.xml">../../src/main/res/values-zh-rHK/strings.xml</a>:63</span>
+<li> <span class="location"><a href="../../src/main/res/values-zh-rTW/strings.xml">../../src/main/res/values-zh-rTW/strings.xml</a>:63</span>
+</ul>
+</div><br/><br/>
+<span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:64</span>: <span class="message">The resource <code>R.string.msg_camera_framework_bug</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  61</span>   &lt;string name="menu_settings">Settings&lt;/string>
+<span class="lineno">  62</span>   &lt;string name="menu_share">Share&lt;/string>
+<span class="lineno">  63</span>   &lt;string name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved&lt;/string>
+<span class="lineno">  64</span>   &lt;string <span class="errorspan">name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.&lt;/string></span>
+<span class="lineno">  65</span>   &lt;string name="msg_default_format">Format&lt;/string>
+<span class="lineno">  66</span>   &lt;string name="msg_default_meta">Metadata&lt;/string>
+</pre>
+<ul></ul><button id="Location9DivLink" onclick="reveal('Location9Div');" />+ 33 Additional Locations...</button>
+<div id="Location9Div" style="display: none">
+Additional locations: <ul>
+<li> <span class="location"><a href="../../src/main/res/values-ar/strings.xml">../../src/main/res/values-ar/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-bg/strings.xml">../../src/main/res/values-bg/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-ca/strings.xml">../../src/main/res/values-ca/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-cs/strings.xml">../../src/main/res/values-cs/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-da/strings.xml">../../src/main/res/values-da/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-de/strings.xml">../../src/main/res/values-de/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-el/strings.xml">../../src/main/res/values-el/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-es/strings.xml">../../src/main/res/values-es/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-eu/strings.xml">../../src/main/res/values-eu/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-fi/strings.xml">../../src/main/res/values-fi/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-fr/strings.xml">../../src/main/res/values-fr/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-he/strings.xml">../../src/main/res/values-he/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-hi/strings.xml">../../src/main/res/values-hi/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-hu/strings.xml">../../src/main/res/values-hu/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-id/strings.xml">../../src/main/res/values-id/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-it/strings.xml">../../src/main/res/values-it/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-iw/strings.xml">../../src/main/res/values-iw/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-ja/strings.xml">../../src/main/res/values-ja/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-ko/strings.xml">../../src/main/res/values-ko/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-nl/strings.xml">../../src/main/res/values-nl/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-pl/strings.xml">../../src/main/res/values-pl/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-pt/strings.xml">../../src/main/res/values-pt/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-ro/strings.xml">../../src/main/res/values-ro/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-ru/strings.xml">../../src/main/res/values-ru/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-sk/strings.xml">../../src/main/res/values-sk/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-sl/strings.xml">../../src/main/res/values-sl/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-sv/strings.xml">../../src/main/res/values-sv/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-th/strings.xml">../../src/main/res/values-th/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-tr/strings.xml">../../src/main/res/values-tr/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-uk/strings.xml">../../src/main/res/values-uk/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-zh-rCN/strings.xml">../../src/main/res/values-zh-rCN/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-zh-rHK/strings.xml">../../src/main/res/values-zh-rHK/strings.xml</a>:64</span>
+<li> <span class="location"><a href="../../src/main/res/values-zh-rTW/strings.xml">../../src/main/res/values-zh-rTW/strings.xml</a>:64</span>
+</ul>
+</div><br/><br/>
+</div>
+</div>
+<div class="metadata">Priority: 3 / 10<br/>
+Category: Performance</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Unused resources.</div>
+<div class="explanation">
+Unused resources make applications larger and slow down builds.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "UnusedResources" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 </div>
 
 <a name="Usability:Icons"></a>
