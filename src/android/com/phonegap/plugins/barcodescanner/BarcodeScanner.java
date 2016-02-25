@@ -160,8 +160,8 @@ public class BarcodeScanner extends CordovaPlugin {
         intentScan.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
 
         if (obj != null) {
-            intentScan.putExtra(Intents.Scan.PREFER_FRONTCAMERA, obj.optBoolean(PREFER_FRONTCAMERA, false));
-            intentScan.putExtra(Intents.Scan.SHOW_FLIP_CAMERA_BUTTON, obj.optBoolean(SHOW_FLIP_CAMERA_BUTTON, false));
+            //intentScan.putExtra(Intents.Scan.PREFER_FRONTCAMERA, obj.optBoolean(PREFER_FRONTCAMERA, false));
+            //intentScan.putExtra(Intents.Scan.SHOW_FLIP_CAMERA_BUTTON, obj.optBoolean(SHOW_FLIP_CAMERA_BUTTON, false));
             if (obj.has(FORMATS)) {
                 intentScan.putExtra(Intents.Scan.FORMATS, obj.optString(FORMATS));
             }
